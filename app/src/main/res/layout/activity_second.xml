@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SecondActivity"
+    android:gravity="top|center_horizontal"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bird"
+        android:adjustViewBounds="true"
+        android:transitionName="birdImg" />
+    <TextView
+        android:id="@+id/tvParam"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text=""
+        android:layout_marginBottom="30dp"
+        />
+    <Button
+        android:id="@+id/btParam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回传-finish"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp" />
+</LinearLayout>
