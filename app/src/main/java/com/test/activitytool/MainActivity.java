@@ -3,6 +3,7 @@ package com.test.activitytool;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ActTools.get(this).startForResult(SecondActivity.class, new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
-                        if(data!=null){
+                        if(resultCode==RESULT_OK){
                             tvResult.setText("Activity回传值:"+data.getStringExtra("param"));
                         }
                     }
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ActTools.get(this).startForResult(SecondActivity.class,intent, new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
-                        if(data!=null){
+                        if(resultCode==RESULT_OK){
                             tvResult.setText("Activity回传值:"+data.getStringExtra("param"));
                         }
                     }
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ActTools.get(this).startForResult(SecondActivity.class,intent, new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
-                        if(data!=null){
+                        if(resultCode==RESULT_OK){
                             tvResult.setText("Activity回传值:"+data.getStringExtra("param"));
                         }
                     }
