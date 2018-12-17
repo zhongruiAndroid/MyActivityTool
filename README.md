@@ -27,13 +27,13 @@ ActTools.startActivity(this,yourActivity.class,intent);
 ```
 
   
-  | 最新版本号 | [ ![Download](https://yapi.bintray.com/packages/zhongrui/mylibrary/ActivityTool/images/download.svg) ](https://bintray.com/zhongrui/mylibrary/ActivityTool/_latestVersion) |  
+  | 最新版本号 | [ ![Download](https://api.bintray.com/packages/zhongrui/mylibrary/ActivityTool/images/download.svg) ](https://bintray.com/zhongrui/mylibrary/ActivityTool/_latestVersion) |  
 |--------|----|  
 
 
 
 ```gradle  
-compile 'com.github:ActivityTools:版本审核中'
+compile 'com.github:ActivityTools:版本号看上面'
 ```
 <br/>  
 
