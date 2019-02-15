@@ -52,7 +52,23 @@ public class ActTools {
     }
 
     /*****************************************************activity ForResult************************************************************************/
-    public void startForResult(Class clazz,Intent intent, ResultCallback callback, Pair... pair) {
+    public void startForResult(Intent intent,ResultCallback callback, Pair... pair) {
+        if(intent==null){
+            throw new IllegalStateException("intent can not null");
+        }
+        int callbackForCode = requestFragment.setCallbackForCode(callback);
+
+        if (pair!=null&&pair.length>0&&android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options =ActivityOptions.makeSceneTransitionAnimation(activity,pair);
+            requestFragment.startActivityForResult(intent,callbackForCode,options.toBundle());
+        }else{
+            requestFragment.startActivityForResult(intent,callbackForCode);
+        }
+    }
+    public void startForResult(Intent intent,ResultCallback callback) {
+        startForResult(intent,callback);
+    }
+    public void startForResult(Intent intent,Class clazz,ResultCallback callback, Pair... pair) {
         if(intent==null){
             intent=new Intent(activity,clazz);
         }else{
@@ -69,15 +85,15 @@ public class ActTools {
         }
 
     }
-    public void startForResult(Class clazz,Intent intent, ResultCallback callback) {
-        startForResult(clazz,intent,callback,null);
+    public void startForResult(Intent intent,Class clazz, ResultCallback callback) {
+        startForResult(intent,clazz,callback,null);
     }
 
     /*****************************************************************************************************************************/
 
     /*****************************************************************************************************************************/
     public void startForResult(Class clazz,ResultCallback callback, Pair... pair) {
-        startForResult(clazz,null,callback,pair);
+        startForResult(null,clazz,callback,pair);
     }
     public void startForResult(Class clazz,ResultCallback callback) {
         startForResult(clazz,callback,null);
@@ -87,7 +103,7 @@ public class ActTools {
 
 
     /*****************************************************activity NoForResult************************************************************************/
-    public static void startActivity(Activity activity,Class clazz,Intent intent,Pair... pair) {
+    public static void startActivity(Intent intent,Activity activity,Class clazz,Pair... pair) {
         if(intent==null){
             intent=new Intent(activity,clazz);
         }else{
@@ -101,12 +117,12 @@ public class ActTools {
         }
 
     }
-    public static void startActivity(Activity activity,Class clazz,Intent intent ) {
-        startActivity(activity,clazz,intent,null);
+    public static void startActivity(Intent intent,Activity activity,Class clazz) {
+        startActivity(intent,activity,clazz,null);
     }
     /*****************************************************************************************************************************/
     public static void startActivity(Activity activity,Class clazz, Pair... pair) {
-        startActivity(activity,clazz,null,pair);
+        startActivity(null,activity,clazz,pair);
     }
     public static void startActivity(Activity activity,Class clazz) {
         startActivity(activity,clazz, new Pair[0]);
@@ -128,11 +144,11 @@ public class ActTools {
 
     }
     public static void startActivity(Fragment fragment,Class clazz,Intent intent ) {
-        startActivity(fragment.getActivity(),clazz,intent,null);
+        startActivity(intent,fragment.getActivity(),clazz,null);
     }
     /*****************************************************************************************************************************/
     public static void startActivity(Fragment fragment,Class clazz, Pair... pair) {
-        startActivity(fragment.getActivity(),clazz,null,pair);
+        startActivity(null,fragment.getActivity(),clazz,pair);
     }
     public static void startActivity(Fragment fragment,Class clazz) {
         startActivity(fragment.getActivity(),clazz, new Pair[0]);
