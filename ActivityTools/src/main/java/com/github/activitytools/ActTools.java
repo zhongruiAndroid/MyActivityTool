@@ -86,7 +86,7 @@ public class ActTools {
 
     }
     public void startForResult(Intent intent,Class clazz, ResultCallback callback) {
-        startForResult(intent,clazz,callback,null);
+        startForResult(intent,clazz,callback,new Pair[0]);
     }
 
     /*****************************************************************************************************************************/
@@ -96,7 +96,7 @@ public class ActTools {
         startForResult(null,clazz,callback,pair);
     }
     public void startForResult(Class clazz,ResultCallback callback) {
-        startForResult(clazz,callback,null);
+        startForResult(clazz,callback,new Pair[0]);
     }
     /*****************************************************************************************************************************/
 
@@ -118,7 +118,7 @@ public class ActTools {
 
     }
     public static void startActivity(Intent intent,Activity activity,Class clazz) {
-        startActivity(intent,activity,clazz,null);
+        startActivity(intent,activity,clazz,new Pair[0]);
     }
     /*****************************************************************************************************************************/
     public static void startActivity(Activity activity,Class clazz, Pair... pair) {
@@ -144,7 +144,7 @@ public class ActTools {
 
     }
     public static void startActivity(Fragment fragment,Class clazz,Intent intent ) {
-        startActivity(intent,fragment.getActivity(),clazz,null);
+        startActivity(intent,fragment.getActivity(),clazz,new Pair[0]);
     }
     /*****************************************************************************************************************************/
     public static void startActivity(Fragment fragment,Class clazz, Pair... pair) {

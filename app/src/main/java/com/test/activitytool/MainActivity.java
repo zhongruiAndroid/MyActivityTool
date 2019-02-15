@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 //回传
-                ActTools.get(this).startForResult(SecondActivity.class,intent, new ResultCallback() {
+                ActTools.get(this).startForResult(intent,SecondActivity.class, new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
                         if(resultCode==RESULT_OK){
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 //回传
-                ActTools.get(this).startForResult(SecondActivity.class,intent, new ResultCallback() {
+                ActTools.get(this).startForResult(intent,SecondActivity.class, new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
                         if(resultCode==RESULT_OK){
