@@ -2,10 +2,7 @@ package com.github.activitytools;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,90 +14,31 @@ import android.util.Pair;
  * @time 2018-12-13 15:09
  */
 public class ActTools {
-    private final String TAG = this.getClass().getSimpleName();
-    private FragmentActivity activity;
+    private static final String TAG ="ActToolsRequestFragment";
 
-    private RequestFragment requestFragment;
-
-
-    public static ActTools get(Fragment fragment) {
+    public static ActToolsRequestManager get(Fragment fragment) {
+        if(fragment==null){
+            throw new IllegalStateException("get(fragment)参数不能为空");
+        }
         return get(fragment.getActivity());
     }
 
-    public static ActTools get(FragmentActivity activity) {
-        return new ActTools(activity);
-    }
-
-    private ActTools(FragmentActivity activity) {
+    public static ActToolsRequestManager get(FragmentActivity activity) {
         if (activity == null) {
-            throw new IllegalStateException("get()参数不能为空");
+            throw new IllegalStateException("get(activity)参数不能为空");
         }
-        this.activity = activity;
-        initFragment();
-    }
-
-
-    private void initFragment() {
-        Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(TAG);
+        FragmentManager fm = activity.getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag(TAG);
         if (fragment == null) {
-            requestFragment = RequestFragment.newInstance();
-            activity.getSupportFragmentManager().beginTransaction().add(requestFragment, TAG).commitAllowingStateLoss();
-            activity.getSupportFragmentManager().executePendingTransactions();
+            RequestFragment requestFragment = RequestFragment.newInstance();
+            fm.beginTransaction().add(requestFragment, TAG).commitAllowingStateLoss();
+            fm.executePendingTransactions();
+            return requestFragment.getRequestManager();
         } else {
-            requestFragment = (RequestFragment) fragment;
+            return ((RequestFragment) fragment).getRequestManager();
         }
     }
-    //region   activity forResult       -----------------------------------------
 
-    /*****************************************************activity forResult************************************************************************/
-    public void startForResult(Intent intent,ResultCallback callback, Pair... pair) {
-        if(intent==null){
-            throw new IllegalStateException("intent can not null");
-        }
-        int callbackForCode = requestFragment.setCallbackForCode(callback);
-
-        if (pair!=null&&pair.length>0&&android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options =ActivityOptions.makeSceneTransitionAnimation(activity,pair);
-            requestFragment.startActivityForResult(intent,callbackForCode,options.toBundle());
-        }else{
-            requestFragment.startActivityForResult(intent,callbackForCode);
-        }
-    }
-    public void startForResult(Intent intent,ResultCallback callback) {
-        startForResult(intent,callback,new Pair[0]);
-    }
-    public void startForResult(Intent intent,Class clazz,ResultCallback callback, Pair... pair) {
-        if(intent==null){
-            intent=new Intent(activity,clazz);
-        }else{
-            intent.setClass(activity,clazz);
-        }
-
-        int callbackForCode = requestFragment.setCallbackForCode(callback);
-
-        if (pair!=null&&pair.length>0&&android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options =ActivityOptions.makeSceneTransitionAnimation(activity,pair);
-            requestFragment.startActivityForResult(intent,callbackForCode,options.toBundle());
-        }else{
-            requestFragment.startActivityForResult(intent,callbackForCode);
-        }
-
-    }
-    public void startForResult(Intent intent,Class clazz, ResultCallback callback) {
-        startForResult(intent,clazz,callback,new Pair[0]);
-    }
-
-    /*****************************************************************************************************************************/
-
-    /*****************************************************************************************************************************/
-    public void startForResult(Class clazz,ResultCallback callback, Pair... pair) {
-        startForResult(null,clazz,callback,pair);
-    }
-    public void startForResult(Class clazz,ResultCallback callback) {
-        startForResult(clazz,callback,new Pair[0]);
-    }
-    /*****************************************************************************************************************************/
-    //endregion
 
 
     //region   activity noForResult  -----------------------------------------
@@ -117,19 +55,16 @@ public class ActTools {
         }else{
             activity.startActivity(intent);
         }
-
     }
     public static void startActivity(Intent intent,Activity activity,Class clazz) {
         startActivity(intent,activity,clazz,new Pair[0]);
     }
-    /*****************************************************************************************************************************/
     public static void startActivity(Activity activity,Class clazz, Pair... pair) {
         startActivity(null,activity,clazz,pair);
     }
     public static void startActivity(Activity activity,Class clazz) {
         startActivity(null,activity,clazz, new Pair[0]);
     }
-    /*****************************************************************************************************************************/
     /*****************************************************fragment NoForResult************************************************************************/
     public static void startActivity(Intent intent,Fragment fragment,Class clazz,Pair... pair) {
         startActivity(intent,fragment.getActivity(),clazz,pair);
