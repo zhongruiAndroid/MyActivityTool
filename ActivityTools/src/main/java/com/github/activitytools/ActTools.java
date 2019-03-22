@@ -66,7 +66,7 @@ public class ActTools {
         }
     }
     public void startForResult(Intent intent,ResultCallback callback) {
-        startForResult(intent,callback);
+        startForResult(intent,callback,null);
     }
     public void startForResult(Intent intent,Class clazz,ResultCallback callback, Pair... pair) {
         if(intent==null){
