@@ -10,7 +10,7 @@ ActTools.get(this).startForResult(yourActivity.class,new ResultCallback(){
   }
 });
 
-ActTools.get(this).startForResult(yourActivity.class,intent,new ResultCallback(){
+ActTools.get(this).startForResult(intent,yourActivity.class,new ResultCallback(){
     @Override
     public void onActivityResult(int resultCode, Intent data) {
         if(resultCode==RESULT_OK){
@@ -23,11 +23,11 @@ ActTools.get(this).startForResult(yourActivity.class,intent,new ResultCallback()
 ### startActivity
 ```java
 ActTools.startActivity(this,yourActivity.class);
-ActTools.startActivity(this,yourActivity.class,intent);
+ActTools.startActivity(intent,this,yourActivity.class);
 ```
 
   
-  | 最新版本号 | [ ![Download](https://api.bintray.com/packages/zhongrui/mylibrary/ActivityTool/images/download.svg) ](https://bintray.com/zhongrui/mylibrary/ActivityTool/_latestVersion) |  
+  | 最新版本号 | [ ![Download](https://api.bintray.com/packages/zhongrui/mylibrary/ActivityTools/images/download.svg) ](https://bintray.com/zhongrui/mylibrary/ActivityTools/_latestVersion) |  
 |--------|----|  
 
 
