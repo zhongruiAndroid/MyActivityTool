@@ -13,7 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Pair;
 
 /**
- * @createBy Administrator
+ * @createBy zhongRui
  * @time 2018-12-13 15:09
  */
 public class ActTools {
@@ -50,8 +50,9 @@ public class ActTools {
             requestFragment = (RequestFragment) fragment;
         }
     }
+    //region   activity forResult       -----------------------------------------
 
-    /*****************************************************activity ForResult************************************************************************/
+    /*****************************************************activity forResult************************************************************************/
     public void startForResult(Intent intent,ResultCallback callback, Pair... pair) {
         if(intent==null){
             throw new IllegalStateException("intent can not null");
@@ -66,7 +67,7 @@ public class ActTools {
         }
     }
     public void startForResult(Intent intent,ResultCallback callback) {
-        startForResult(intent,callback,null);
+        startForResult(intent,callback,new Pair[0]);
     }
     public void startForResult(Intent intent,Class clazz,ResultCallback callback, Pair... pair) {
         if(intent==null){
@@ -99,10 +100,11 @@ public class ActTools {
         startForResult(clazz,callback,new Pair[0]);
     }
     /*****************************************************************************************************************************/
+    //endregion
 
 
-
-    /*****************************************************activity NoForResult************************************************************************/
+    //region   activity noForResult  -----------------------------------------
+    /*****************************************************activity noForResult************************************************************************/
     public static void startActivity(Intent intent,Activity activity,Class clazz,Pair... pair) {
         if(intent==null){
             intent=new Intent(activity,clazz);
@@ -125,25 +127,14 @@ public class ActTools {
         startActivity(null,activity,clazz,pair);
     }
     public static void startActivity(Activity activity,Class clazz) {
-        startActivity(activity,clazz, new Pair[0]);
+        startActivity(null,activity,clazz, new Pair[0]);
     }
     /*****************************************************************************************************************************/
     /*****************************************************fragment NoForResult************************************************************************/
-    public static void startActivity(Fragment fragment,Class clazz,Intent intent,Pair... pair) {
-        if(intent==null){
-            intent=new Intent(fragment.getActivity(),clazz);
-        }else{
-            intent.setClass(fragment.getActivity(),clazz);
-        }
-        if (pair!=null&&pair.length>0&&android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options =ActivityOptions.makeSceneTransitionAnimation(fragment.getActivity(),pair);
-            ActivityCompat.startActivity(fragment.getActivity(),intent,options.toBundle());
-        }else{
-            fragment.getActivity().startActivity(intent);
-        }
-
+    public static void startActivity(Intent intent,Fragment fragment,Class clazz,Pair... pair) {
+        startActivity(intent,fragment.getActivity(),clazz,pair);
     }
-    public static void startActivity(Fragment fragment,Class clazz,Intent intent ) {
+    public static void startActivity(Intent intent,Fragment fragment,Class clazz) {
         startActivity(intent,fragment.getActivity(),clazz,new Pair[0]);
     }
     /*****************************************************************************************************************************/
@@ -151,8 +142,8 @@ public class ActTools {
         startActivity(null,fragment.getActivity(),clazz,pair);
     }
     public static void startActivity(Fragment fragment,Class clazz) {
-        startActivity(fragment.getActivity(),clazz, new Pair[0]);
+        startActivity(null,fragment.getActivity(),clazz, new Pair[0]);
     }
     /*****************************************************************************************************************************/
-
+    //endregion
 }
