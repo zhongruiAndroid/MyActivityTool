@@ -7,7 +7,7 @@ import android.util.Pair;
 /***
  *   created by android on 2019/3/22
  */
-class ActToolsRequestManager {
+public class ActToolsRequestManager {
     private RequestFragment requestFragment;
 
     public ActToolsRequestManager(RequestFragment requestFragment) {
