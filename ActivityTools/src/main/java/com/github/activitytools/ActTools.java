@@ -16,6 +16,9 @@ import android.util.Pair;
 public class ActTools {
     private static final String TAG ="ActToolsRequestFragment";
 
+    private ActTools() {
+    }
+
     public static ActToolsRequestManager get(Fragment fragment) {
         if(fragment==null){
             throw new IllegalStateException("get(fragment)参数不能为空");
