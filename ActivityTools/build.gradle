@@ -42,3 +42,4 @@ def fileIsExists(String fileName){
 if (fileIsExists("help.gradle")){
     apply from :'help.gradle'
 }
+/***********************编译失败请注释上面代码***********************/
