@@ -26,6 +26,9 @@ ActTools.startActivity(this,yourActivity.class);
 ActTools.startActivity(intent,this,yourActivity.class);
 ```
 
+### 如果本库对您有帮助,还希望支付宝扫一扫下面二维码,你我同时免费获取奖励金(非常感谢 Y(^-^)Y)
+![github](https://github.com/zhongruiAndroid/SomeImage/blob/master/image/small_ali.jpg?raw=true "github")  
+
   
   | 最新版本号 | [ ![Download](https://api.bintray.com/packages/zhongrui/mylibrary/ActivityTools/images/download.svg) ](https://bintray.com/zhongrui/mylibrary/ActivityTools/_latestVersion) |  
 |--------|----|  
