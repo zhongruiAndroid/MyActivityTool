@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
  */
 public class ActTools {
     private static final String TAGCompat = "ActToolsRequestFragmentCompat";
+    private static final String TAG = "ActToolsRequestFragment";
 
     private ActTools() {
     }
@@ -43,7 +44,28 @@ public class ActTools {
         }
     }
 
+    public static RequestInter get(android.app.Fragment  fragment) {
+        if (fragment == null) {
+            throw new IllegalStateException("get(fragment)参数不能为空");
+        }
+        return get(fragment.getActivity());
+    }
 
+    public static RequestInter get(Activity activity) {
+        if (activity == null) {
+            throw new IllegalStateException("get(activity)参数不能为空");
+        }
+        android.app.FragmentManager fm = activity.getFragmentManager();
+        android.app.Fragment fragment = fm.findFragmentByTag(TAG);
+        if (fragment == null) {
+            RequestFragmentOld requestFragment = RequestFragmentOld.newInstance();
+            fm.beginTransaction().add(requestFragment, TAG).commitAllowingStateLoss();
+            fm.executePendingTransactions();
+            return requestFragment;
+        } else {
+            return ((RequestFragmentOld) fragment);
+        }
+    }
     //region   activity noForResult  -----------------------------------------
 
     /*****************************************************activity noForResult************************************************************************/
@@ -91,5 +113,12 @@ public class ActTools {
         startActivity(null, fragment.getActivity(), clazz, new Pair[0]);
     }
     /*****************************************************************************************************************************/
+    public static void startActivity(android.app.Fragment fragment, Class clazz, Pair... pair) {
+        startActivity(null, fragment.getActivity(), clazz, pair);
+    }
+
+    public static void startActivity(android.app.Fragment fragment, Class clazz) {
+        startActivity(null, fragment.getActivity(), clazz, new Pair[0]);
+    }
     //endregion
 }
