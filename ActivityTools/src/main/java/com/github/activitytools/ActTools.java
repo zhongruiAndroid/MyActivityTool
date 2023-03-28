@@ -44,7 +44,7 @@ public class ActTools {
         }
     }
 
-    public static RequestInter get(android.app.Fragment  fragment) {
+    public static RequestInter get(android.app.Fragment fragment) {
         if (fragment == null) {
             throw new IllegalStateException("get(fragment)参数不能为空");
         }
@@ -69,11 +69,9 @@ public class ActTools {
     //region   activity noForResult  -----------------------------------------
 
     /*****************************************************activity noForResult************************************************************************/
-    public static void startActivity(Intent intent, Activity activity, Class clazz, Pair... pair) {
+    public static void startActivity(Activity activity, Intent intent, Pair... pair) {
         if (intent == null) {
-            intent = new Intent(activity, clazz);
-        } else {
-            intent.setClass(activity, clazz);
+            return;
         }
         if (pair != null && pair.length > 0 && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, pair);
@@ -82,43 +80,27 @@ public class ActTools {
             activity.startActivity(intent);
         }
     }
-
-    public static void startActivity(Intent intent, Activity activity, Class clazz) {
-        startActivity(intent, activity, clazz, new Pair[0]);
-    }
-
     public static void startActivity(Activity activity, Class clazz, Pair... pair) {
-        startActivity(null, activity, clazz, pair);
+        startActivity(activity,new Intent(activity,clazz),pair);
     }
-
-    public static void startActivity(Activity activity, Class clazz) {
-        startActivity(null, activity, clazz, new Pair[0]);
-    }
-
     /*****************************************************fragment NoForResult************************************************************************/
-    public static void startActivity(Intent intent, Fragment fragment, Class clazz, Pair... pair) {
-        startActivity(intent, fragment.getActivity(), clazz, pair);
+    public static void startActivity(Fragment fragment, Intent intent, Pair... pair) {
+        startActivity(fragment.getActivity(), intent, pair);
+    }
+    public static void startActivity(android.app.Fragment fragment, Intent intent, Pair... pair) {
+        startActivity(fragment.getActivity(), intent, pair);
     }
 
-    public static void startActivity(Intent intent, Fragment fragment, Class clazz) {
-        startActivity(intent, fragment.getActivity(), clazz, new Pair[0]);
-    }
 
     /*****************************************************************************************************************************/
     public static void startActivity(Fragment fragment, Class clazz, Pair... pair) {
-        startActivity(null, fragment.getActivity(), clazz, pair);
+        startActivity(fragment.getActivity(), new Intent(fragment.getActivity(), clazz), pair);
     }
 
-    public static void startActivity(Fragment fragment, Class clazz) {
-        startActivity(null, fragment.getActivity(), clazz, new Pair[0]);
-    }
     /*****************************************************************************************************************************/
     public static void startActivity(android.app.Fragment fragment, Class clazz, Pair... pair) {
-        startActivity(null, fragment.getActivity(), clazz, pair);
+        startActivity(fragment.getActivity(), new Intent(fragment.getActivity(), clazz), pair);
     }
 
-    public static void startActivity(android.app.Fragment fragment, Class clazz) {
-        startActivity(null, fragment.getActivity(), clazz, new Pair[0]);
-    }
     //endregion
 }

@@ -90,37 +90,8 @@ public class RequestFragment extends Fragment implements RequestInter {
         }
     }
 
-    public void startForResult(Intent intent, ResultCallback callback) {
-        startForResult(intent, callback, new Pair[0]);
-    }
-
-    public void startForResult(Intent intent, Class clazz, ResultCallback callback, Pair... pair) {
-        if (intent == null) {
-            intent = new Intent(getActivity(), clazz);
-        } else {
-            intent.setClass(getActivity(), clazz);
-        }
-
-        int callbackForCode = setCallbackForCode(callback);
-
-        if (pair != null && pair.length > 0 && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pair);
-            startActivityForResult(intent, callbackForCode, options.toBundle());
-        } else {
-            startActivityForResult(intent, callbackForCode);
-        }
-
-    }
-
-    public void startForResult(Intent intent, Class clazz, ResultCallback callback) {
-        startForResult(intent, clazz, callback, new Pair[0]);
-    }
-
     public void startForResult(Class clazz, ResultCallback callback, Pair... pair) {
-        startForResult(null, clazz, callback, pair);
+        startForResult(new Intent(getActivity(),clazz), callback, pair);
     }
 
-    public void startForResult(Class clazz, ResultCallback callback) {
-        startForResult(null, clazz, callback, new Pair[0]);
-    }
 }
