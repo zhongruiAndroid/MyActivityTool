@@ -1,8 +1,5 @@
 package com.github.activitytools;
 
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;
