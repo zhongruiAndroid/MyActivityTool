@@ -1,8 +1,6 @@
 package com.github.activitytools;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Pair;
 
@@ -54,36 +52,4 @@ public class RequestFragmentSupport extends Fragment implements RequestInter, Fr
         getHelper().startForResult(this, intent, callback, pair);
     }
 
-    @Override
-    public Activity getTheActivity() {
-        return getActivity();
-    }
-
-    @Override
-    public void onStartActivityForResult(Intent intent, int requestCode) {
-        startActivityForResult(intent, requestCode);
-    }
-
-    @Override
-    public void onStartActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            startActivityForResult(intent, requestCode, options);
-        } else {
-            startActivityForResult(intent, requestCode);
-        }
-    }
-
-    @Override
-    public void onStartActivity(Intent intent) {
-        startActivity(intent);
-    }
-
-    @Override
-    public void onStartActivity(Intent intent, Bundle options) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            startActivity(intent, options);
-        } else {
-            startActivity(intent);
-        }
-    }
 }
