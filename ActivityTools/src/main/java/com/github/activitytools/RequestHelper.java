@@ -14,7 +14,7 @@ public class RequestHelper   {
     private Random random = new Random();
 
     public void startForResult(FragmentInter fragmentInter, Class clazz, ResultCallback callback, Pair... pair) {
-        startForResult(fragmentInter, new Intent(fragmentInter.getActivity(), clazz), callback, pair);
+        startForResult(fragmentInter, new Intent(fragmentInter.getTheActivity(), clazz), callback, pair);
     }
 
     public void startForResult(FragmentInter fragmentInter, Intent intent, ResultCallback callback, Pair... pair) {
@@ -22,19 +22,19 @@ public class RequestHelper   {
             throw new IllegalStateException("intent can not null");
         }
         if (pair != null && pair.length > 0 && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(fragmentInter.getActivity(), pair);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(fragmentInter.getTheActivity(), pair);
             if (callback == null) {
-                fragmentInter.startActivity(intent, options.toBundle());
+                fragmentInter.onStartActivity(intent, options.toBundle());
             } else {
                 int callbackForCode = setCallbackForCode(callback);
-                fragmentInter.startActivityForResult(intent, callbackForCode, options.toBundle());
+                fragmentInter.onStartActivityForResult(intent, callbackForCode, options.toBundle());
             }
         } else {
             if (callback == null) {
-                fragmentInter.startActivity(intent);
+                fragmentInter.onStartActivity(intent);
             } else {
                 int callbackForCode = setCallbackForCode(callback);
-                fragmentInter.startActivityForResult(intent, callbackForCode);
+                fragmentInter.onStartActivityForResult(intent, callbackForCode);
             }
         }
     }

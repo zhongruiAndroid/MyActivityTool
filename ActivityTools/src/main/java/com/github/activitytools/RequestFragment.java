@@ -1,7 +1,9 @@
 package com.github.activitytools;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Pair;
 
@@ -11,11 +13,12 @@ import androidx.annotation.Nullable;
  * @createBy zhongRui
  * @time 2018-12-13 15:10
  */
-public class RequestFragment extends Fragment implements RequestInter,FragmentInter {
-    private RequestHelper helper=new RequestHelper();
+public class RequestFragment extends Fragment implements RequestInter, FragmentInter {
+    private RequestHelper helper = new RequestHelper();
+
     private RequestHelper getHelper() {
-        if(helper==null){
-            helper=new RequestHelper();
+        if (helper == null) {
+            helper = new RequestHelper();
         }
         return helper;
     }
@@ -53,4 +56,36 @@ public class RequestFragment extends Fragment implements RequestInter,FragmentIn
         getHelper().startForResult(this, intent, callback, pair);
     }
 
+    @Override
+    public Activity getTheActivity() {
+        return getActivity();
+    }
+
+    @Override
+    public void onStartActivityForResult(Intent intent, int requestCode) {
+        startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public void onStartActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            startActivityForResult(intent, requestCode, options);
+        } else {
+            startActivityForResult(intent, requestCode);
+        }
+    }
+
+    @Override
+    public void onStartActivity(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void onStartActivity(Intent intent, Bundle options) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            startActivity(intent, options);
+        } else {
+            startActivity(intent);
+        }
+    }
 }
