@@ -1,17 +1,17 @@
 package com.github.activitytools;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * @createBy zhongRui
  * @time 2018-12-13 15:10
  */
-public class RequestFragment extends Fragment implements RequestInter,FragmentInter {
+public class RequestFragmentSupport extends Fragment implements RequestInter, FragmentInter {
     private RequestHelper helper=new RequestHelper();
     private RequestHelper getHelper() {
         if(helper==null){
@@ -20,9 +20,8 @@ public class RequestFragment extends Fragment implements RequestInter,FragmentIn
         return helper;
     }
 
-
-    public static RequestFragment newInstance() {
-        RequestFragment fragment = new RequestFragment();
+    public static RequestFragmentSupport newInstance() {
+        RequestFragmentSupport fragment = new RequestFragmentSupport();
         return fragment;
     }
 

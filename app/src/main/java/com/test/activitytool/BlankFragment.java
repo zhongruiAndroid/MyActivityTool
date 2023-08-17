@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +15,10 @@ import android.widget.TextView;
 
 import com.github.activitytools.ActTools;
 import com.github.activitytools.ResultCallback;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 
 public class BlankFragment extends Fragment implements View.OnClickListener {
@@ -85,14 +86,14 @@ public class BlankFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.bt12:
                 //Fragment跳转intent传值
-                intent=new Intent();
+                intent=new Intent(getActivity(),SecondActivity.class);
                 intent.putExtra("set","intent传值");
                 //不回传
 //                ActTools.startActivity(this,SecondActivity.class,intent);
 
 
                 //回传
-                ActTools.get(this).startForResult(intent,SecondActivity.class, new ResultCallback() {
+                ActTools.get(this).startForResult(intent,new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
                         if(data!=null){
@@ -105,12 +106,13 @@ public class BlankFragment extends Fragment implements View.OnClickListener {
                 Pair pair=new Pair(ivImageFragment,"birdImg");
                 //Fragment跳转转场动画
                 intent=new Intent("转场动画");
+                intent.setClass(getActivity(),SecondActivity.class);
                 //不回传
 //                ActTools.startActivity(this,SecondActivity.class,pair);
 
 
                 //回传
-                ActTools.get(this).startForResult(intent,SecondActivity.class, new ResultCallback() {
+                ActTools.get(this).startForResult(intent, new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
                         if(data!=null){

@@ -1,7 +1,6 @@
 package com.test.activitytool;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -12,6 +11,8 @@ import android.widget.TextView;
 
 import com.github.activitytools.ActTools;
 import com.github.activitytools.ResultCallback;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button bt1,bt2,bt4;
@@ -60,14 +61,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             break;
             case R.id.bt2:
                 //Activity跳转intent传值
-                intent=new Intent();
+                intent=new Intent(this,SecondActivity.class);
                 intent.putExtra("set","intent传值");
                 //不回传
 //                ActTools.startActivity(this,SecondActivity.class,intent);
 
 
                 //回传
-                ActTools.get(this).startForResult(intent,SecondActivity.class, new ResultCallback() {
+                ActTools.get(this).startForResult(intent,new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
                         if(resultCode==RESULT_OK){
@@ -80,12 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Pair pair=new Pair(ivImage,"birdImg");
                 //Activity跳转转场动画
                 intent=new Intent("转场动画");
+                intent.setClass(this,SecondActivity.class);
                 //不回传
 //                ActTools.startActivity(this,SecondActivity.class,pair);
 
 
                 //回传
-                ActTools.get(this).startForResult(intent,SecondActivity.class, new ResultCallback() {
+                ActTools.get(this).startForResult(intent, new ResultCallback() {
                     @Override
                     public void onActivityResult(int resultCode, Intent data) {
                         if(resultCode==RESULT_OK){
