@@ -1,9 +1,6 @@
 package com.test.activitytool;
 
-import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
